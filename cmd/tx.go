@@ -46,6 +46,8 @@ var txPurchaseCmd = &cobra.Command{
 
 func init() {
 	transferCmd := txTransferCmd
+	transferCmd.Flags().SortFlags = false
+
 	transferCmd.Flags().String("from", "", "ex) a8cxVrk1ju91UaJf7U1Hscgn3sRqzfmjgg")
 	transferCmd.Flags().String("to", "", "ex) aH2JdDUP5NoFmeEQEqDREZnkmCh8V7co7y")
 	transferCmd.Flags().Uint64("amount", 0, "specify 'amount'")
@@ -54,6 +56,8 @@ func init() {
 	transferCmd.MarkFlagRequired("amount")
 
 	purchaseCmd := txPurchaseCmd
+	purchaseCmd.Flags().SortFlags = false
+
 	purchaseCmd.Flags().String("from", "", "ex) a8cxVrk1ju91UaJf7U1Hscgn3sRqzfmjgg")
 	purchaseCmd.Flags().String("file_hash", "", "ex) 0xb94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9")
 	purchaseCmd.MarkFlagRequired("from")
