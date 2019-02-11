@@ -2,8 +2,12 @@ package cmd
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/spf13/cobra"
+
+	atypes "github.com/amolabs/amoabci/amo/types"
+	"github.com/amolabs/amoconsole/tx"
 )
 
 /* Commands (expected hierarchy)
@@ -42,16 +46,16 @@ var txPurchaseCmd = &cobra.Command{
 
 func init() {
 	transferCmd := txTransferCmd
-	transferCmd.Flags().String("from", "", "specify 'from' address")
-	transferCmd.Flags().String("to", "", "specify 'to' address")
-	transferCmd.Flags().Uint32("amount", 0, "specify 'amount'")
+	transferCmd.Flags().String("from", "", "ex) a8cxVrk1ju91UaJf7U1Hscgn3sRqzfmjgg")
+	transferCmd.Flags().String("to", "", "ex) aH2JdDUP5NoFmeEQEqDREZnkmCh8V7co7y")
+	transferCmd.Flags().Uint64("amount", 0, "specify 'amount'")
 	transferCmd.MarkFlagRequired("from")
 	transferCmd.MarkFlagRequired("to")
 	transferCmd.MarkFlagRequired("amount")
 
 	purchaseCmd := txPurchaseCmd
-	purchaseCmd.Flags().String("from", "", "specify 'from' address")
-	purchaseCmd.Flags().String("file_hash", "", "specify file's hash")
+	purchaseCmd.Flags().String("from", "", "ex) a8cxVrk1ju91UaJf7U1Hscgn3sRqzfmjgg")
+	purchaseCmd.Flags().String("file_hash", "", "ex) 0xb94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9")
 	purchaseCmd.MarkFlagRequired("from")
 	purchaseCmd.MarkFlagRequired("file_hash")
 
@@ -61,7 +65,7 @@ func init() {
 
 func txTransferFunc(cmd *cobra.Command, args []string) error {
 	var from, to string
-	var amount uint32
+	var amount uint64
 	var err error
 
 	flags := cmd.Flags()
@@ -72,17 +76,25 @@ func txTransferFunc(cmd *cobra.Command, args []string) error {
 	if to, err = flags.GetString("to"); err != nil {
 		return err
 	}
-	if amount, err = flags.GetUint32("amount"); err != nil {
+	if amount, err = flags.GetUint64("amount"); err != nil {
 		return err
 	}
 
-	fmt.Printf("'%s' transfers '%d' to '%s'\n", from, amount, to)
+	fromAddr := atypes.NewAddressFromBytes([]byte(from))
+	toAddr := atypes.NewAddressFromBytes([]byte(to))
+
+	result, err := tx.Transfer(*fromAddr, *toAddr, &amount)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(result.DeliverTx.String())
 
 	return nil
 }
 
 func txPurchaseFunc(cmd *cobra.Command, args []string) error {
-	var from, fileHash string
+	var from, fileHashString string
 	var err error
 
 	flags := cmd.Flags()
@@ -90,11 +102,21 @@ func txPurchaseFunc(cmd *cobra.Command, args []string) error {
 	if from, err = flags.GetString("from"); err != nil {
 		return err
 	}
-	if fileHash, err = flags.GetString("file_hash"); err != nil {
+	if fileHashString, err = flags.GetString("file_hash"); err != nil {
 		return err
 	}
 
-	fmt.Printf("'%s' purchases '%s'\n", from, fileHash)
+	fileHashString = strings.TrimLeft(fileHashString, "0x")
+
+	fromAddr := atypes.NewAddressFromBytes([]byte(from))
+	fileHash := atypes.NewHashByHexString(fileHashString)
+
+	result, err := tx.Purchase(*fromAddr, *fileHash)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(result.DeliverTx.String())
 
 	return nil
 }

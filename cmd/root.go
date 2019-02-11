@@ -9,7 +9,7 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:               "amocli",
-	Short:             "amocli is a console app for a user to interact with 'amo' daemon",
+	Short:             "Console app for a user to interact with 'amo' daemon",
 	PersistentPreRunE: loadConfig,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if err := cmd.Help(); err != nil {

@@ -13,6 +13,7 @@
 
 # Build binary, build with `go build -o`
 amocli
+amoconsole
 
 # dependencies
 vendor
