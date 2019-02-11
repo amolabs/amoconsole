@@ -32,7 +32,7 @@ var queryAddressCmd = &cobra.Command{
 	Short: "Shows address's general information",
 	Args:  cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		target := atypes.NewAddressFromBytes([]byte(args[0]))
+		target := atypes.NewAddress([]byte(args[0]))
 		targetInfo, err := tx.QueryAddressInfo(*target)
 		if err != nil {
 			return err

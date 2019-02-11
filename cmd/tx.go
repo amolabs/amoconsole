@@ -84,8 +84,8 @@ func txTransferFunc(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	fromAddr := atypes.NewAddressFromBytes([]byte(from))
-	toAddr := atypes.NewAddressFromBytes([]byte(to))
+	fromAddr := atypes.NewAddress([]byte(from))
+	toAddr := atypes.NewAddress([]byte(to))
 
 	result, err := tx.Transfer(*fromAddr, *toAddr, &amount)
 	if err != nil {
@@ -117,7 +117,7 @@ func txPurchaseFunc(cmd *cobra.Command, args []string) error {
 
 	fileHashString = strings.TrimLeft(fileHashString, "0x")
 
-	fromAddr := atypes.NewAddressFromBytes([]byte(from))
+	fromAddr := atypes.NewAddress([]byte(from))
 	fileHash := atypes.NewHashByHexString(fileHashString)
 
 	result, err := tx.Purchase(*fromAddr, *fileHash)
