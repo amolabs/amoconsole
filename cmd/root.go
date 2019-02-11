@@ -26,6 +26,7 @@ func Execute() {
 
 	rootCmd.AddCommand(
 		versionCmd,
+		statusCmd,
 		keyCmd,
 		txCmd,
 		queryCmd)

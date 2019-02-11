@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -19,8 +20,7 @@ import (
 var txCmd = &cobra.Command{
 	Use:     "tx",
 	Aliases: []string{"t"},
-	Short:   "performs a transaction",
-	Long:    "amocli tx performs a transaction",
+	Short:   "Performs a transaction",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if err := cmd.Help(); err != nil {
 			return err
@@ -32,14 +32,14 @@ var txCmd = &cobra.Command{
 
 var txTransferCmd = &cobra.Command{
 	Use:   "transfer",
-	Short: "transfers the specified amount of money from <address> to <address>",
+	Short: "Transfers the specified amount of money from <address> to <address>",
 	Args:  cobra.NoArgs,
 	RunE:  txTransferFunc,
 }
 
 var txPurchaseCmd = &cobra.Command{
 	Use:   "purchase",
-	Short: "purchases the file specified with file's <hash>",
+	Short: "Purchases the file specified with file's <hash>",
 	Args:  cobra.NoArgs,
 	RunE:  txPurchaseFunc,
 }
@@ -92,7 +92,12 @@ func txTransferFunc(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	fmt.Println(result.DeliverTx.String())
+	resultJSON, err := json.Marshal(result)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(string(resultJSON))
 
 	return nil
 }
@@ -120,7 +125,12 @@ func txPurchaseFunc(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	fmt.Println(result.DeliverTx.String())
+	resultJSON, err := json.Marshal(result)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(string(resultJSON))
 
 	return nil
 }

@@ -46,3 +46,8 @@ func RPCABCIQuery(path string, data cmn.HexBytes) (*ctypes.ResultABCIQuery, erro
 	cli := client.NewHTTP(rpcRemote, rpcWsEndpoint)
 	return cli.ABCIQuery(path, data)
 }
+
+func RPCStatus() (*ctypes.ResultStatus, error) {
+	cli := client.NewHTTP(rpcRemote, rpcWsEndpoint)
+	return cli.Status()
+}

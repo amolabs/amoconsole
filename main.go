@@ -7,6 +7,7 @@ import (
 /* Commands (expected hierarchy)
  *
  * amocli |- version
+ *		  |- status
  * 		  |- key |- list
  *		  		 |- generate <nickname>
  *				 |- remove <nickname>
