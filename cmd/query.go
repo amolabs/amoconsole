@@ -11,7 +11,7 @@ import (
 
 /* Commands (expected hierarchy)
  *
- * amocli |- query
+ * amoconsole |- query |- address
  */
 
 var queryCmd = &cobra.Command{

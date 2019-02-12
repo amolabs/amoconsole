@@ -6,16 +6,16 @@ import (
 
 /* Commands (expected hierarchy)
  *
- * amocli |- version
- *		  |- status
- * 		  |- key |- list
- *		  		 |- generate <nickname>
- *				 |- remove <nickname>
+ * amoconsole |- version
+ *		  	  |- status
+ * 		  	  |- key |- list
+ *		  	   		 |- generate <nickname>
+ *					 |- remove <nickname>
  *
- *		  |- tx |- transfer --from <address> --to <address> --amount <number>
- *		  		|- purchase --from <address> --file <hash>
+ *		  	  |- tx |- transfer --from <address> --to <address> --amount <number>
+ *		  			|- purchase --from <address> --file <hash>
  *
- *		  |- query
+ *		  	  |- query |- address <address>
  */
 
 func main() {

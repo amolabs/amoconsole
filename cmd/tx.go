@@ -13,8 +13,8 @@ import (
 
 /* Commands (expected hierarchy)
  *
- * amocli |- tx |- transfer --from <address> --to <address> --amount <number>
- *		  		|- purchase --from <address> --file <hash>
+ * amoconsole |- tx |- transfer --from <address> --to <address> --amount <number>
+ *		    		|- purchase --from <address> --file <hash>
  */
 
 var txCmd = &cobra.Command{

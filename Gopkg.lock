@@ -11,7 +11,7 @@
     "amo/types",
   ]
   pruneopts = "UT"
-  revision = "709cd47be35186846df1edea1fb1394b945d8260"
+  revision = "594177f03eb946b90ec5250aa75154eebb690d54"
 
 [[projects]]
   branch = "master"
