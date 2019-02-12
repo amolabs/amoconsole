@@ -17,3 +17,8 @@ amoconsole
 
 # dependencies
 vendor
+
+# vim
+.*.sw*
+tags
+TAGS
