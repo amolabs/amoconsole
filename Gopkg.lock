@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:b17b44915e2869610e8faa62c538763eff3071748e5ea1e0869f919808ae1a8c"
+  digest = "1:03cbbba15fc7d5ae0279fb15cc1639ad918fd87d48055dfac8347bd01c414254"
   name = "github.com/amolabs/amoabci"
   packages = [
     "amo/encoding/base58",
@@ -11,7 +11,7 @@
     "amo/types",
   ]
   pruneopts = "UT"
-  revision = "594177f03eb946b90ec5250aa75154eebb690d54"
+  revision = "8527fad1296b34e7f919163d76371b7b9ddddb24"
 
 [[projects]]
   branch = "master"

@@ -118,7 +118,7 @@ func txPurchaseFunc(cmd *cobra.Command, args []string) error {
 	fileHashString = strings.TrimLeft(fileHashString, "0x")
 
 	fromAddr := atypes.NewAddress([]byte(from))
-	fileHash := atypes.NewHashByHexString(fileHashString)
+	fileHash := atypes.NewHashFromHexString(fileHashString)
 
 	result, err := tx.Purchase(*fromAddr, *fileHash)
 	if err != nil {
